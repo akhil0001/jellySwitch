@@ -1,6 +1,6 @@
 # jelly-switch
 A simple, customizable and jellified switch built as web component on basic javascript 
-![jelly-switch-demo](https://github.com/akhil0001/jellySwitch/blob/master/demo-1.gif)
+![jelly-switch-demo](https://raw.githubusercontent.com/akhil0001/jellySwitch/master/demo-1.gif)
 
 This micro web component can be used for any frameworks
 
