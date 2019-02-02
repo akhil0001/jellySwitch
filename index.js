@@ -1,4 +1,4 @@
-(function () {
+
     const KEYCODE = {
         SPACE: 32,
         TAB: 9
@@ -216,7 +216,7 @@
         </style>    `;
     }
 
-    class jellySwitch extends HTMLElement {
+export class jellySwitch extends HTMLElement {
 
         static get observedAttributes() {
             return ["toggled", "disabled"];
@@ -345,4 +345,3 @@
     if (window.customElements) {
         customElements.define('jelly-switch', jellySwitch);
     }
-})();

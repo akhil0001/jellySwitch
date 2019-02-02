@@ -1,12 +1,12 @@
 # jelly-switch
 A simple, customizable and jellified switch built as web component on basic javascript 
-![jelly-switch-demo](demo-1.gif)
+![jelly-switch-demo](https://github.com/akhil0001/jellySwitch/blob/master/demo-1.gif)
 
 This micro web component can be used for any frameworks
 
 # Try Now
 Play with the component
-[Demo]()(Link is coming soon!)
+[Demo](https://codesandbox.io/s/405lwrvljw)
 
 # Install
 ### 1. via npm
