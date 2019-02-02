@@ -1,0 +1,27 @@
+{
+  "name": "jelly-switch",
+  "version": "0.1.0",
+  "description": "A simple and jellified switch web component",
+  "main": "jelly-switch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "jelly-switch"
+  },
+  "keywords": [
+    "jelly-switch",
+    "webcomponent",
+    "web",
+    "component",
+    "jelly",
+    "switch",
+    "custom",
+    "element",
+    "custom-element",
+    "switch-UI"
+  ],
+  "author": "AKhil Sai Ram Ch",
+  "license": "MIT"
+}

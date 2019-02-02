@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Jelly Switch Component</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <script src="../index.js"></script>
+</head>
+<body>
+  <h1> Are you in </h1><jelly-switch id="js1" toggled="true"></jelly-switch> 
+  <jelly-switch id="js2" onToggle="return printSomething(event)"></jelly-switch>
+  <style>
+
+h1,jelly-switch
+{
+    display: inline-block;
+    float:left;
+}
+  jelly-switch
+  {
+    margin-top:30px;
+  }
+  #js1
+  {
+      --off-color:grey;
+      --on-color:rgb(65, 65, 236);
+      --offHandle-color:#444;
+      --onHandle-color:#fff;
+  }
+  
+  </style>
+  <script>
+  var jellySwitch = document.getElementById('js1');
+  console.log(jellySwitch.toggle); 
+  function printSomething(e)
+  {
+     jellySwitch.disabled = !jellySwitch.disabled;
+  }
+  </script>
+</body>
+</html>
