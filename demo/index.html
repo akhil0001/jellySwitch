@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Jelly Switch Component</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-   
-</head>
-<body>
-  <jelly-switch id="js1" toggled  onToggle = "console.log('changed')"></jelly-switch>
-  <style>
 
-jelly-switch
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Jelly Switch Component</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+
+<body>
+  <p>Thevalue of switch is changed to <p id="valueOfSwitch"></p>
+  </p>
+  <label for="js1">Let's rock
+  <jelly-switch id="js1" toggled onToggle="return captureTheChangeEvent(event)"></jelly-switch></label>
+  <style>
+    /* This code is to vertically align the label and switch */
+#js1
 {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+    vertical-align:middle;
 }
- 
+label,#js1
+{
+  display: inline-block;
+}
+
+
   </style>
- <script src="../lib/index.js"></script>
- 
+  <script src="../lib/index.js"></script>
+  <script>
+     
+    function captureTheChangeEvent(event) {
+      document.getElementById('valueOfSwitch').innerText = ''+event.detail.value;
+    }
+  </script>
 </body>
+
 </html>

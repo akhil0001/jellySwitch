@@ -1,6 +1,6 @@
 {
   "name": "jelly-switch",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A customizable simple and jellified switch web component",
   "main": "lib/index.js",
   "scripts": {
@@ -20,7 +20,9 @@
     "custom",
     "element",
     "custom-element",
-    "switch-UI"
+    "switch-UI",
+    "toggle",
+    "jelly-toggle"
   ],
   "author": "AKhil Sai Ram Ch",
   "license": "MIT"
