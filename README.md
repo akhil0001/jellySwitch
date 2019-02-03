@@ -7,21 +7,7 @@ This micro web component(~1.7kB) can be used for any framework
 # Try Now
 Play with the component
 [![Edit jelly-switch component demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/ryl1qzxn0m)
-<!---
-```
-<custom-element-demo>
-  <template>
-    <link rel="import" href="../demo/index.html">
-    <div style="height: 200px">
-      <next-code-block></next-code-block>
-    </div
-  </template>
-</custom-element-demo>
-```
--->
-```html
-<jelly-switch></jelly-switch>
-```
+
 # Install
 ### 1. via npm
 ```
