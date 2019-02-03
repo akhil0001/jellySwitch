@@ -1,14 +1,14 @@
 {
   "name": "jelly-switch",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A customizable simple and jellified switch web component",
-  "main": "jelly-switch.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "jelly-switch"
+    "url": "https://github.com/akhil0001/jellySwitch"
   },
   "keywords": [
     "jelly-switch",
