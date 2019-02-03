@@ -1,3 +1,12 @@
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jelly-switch)
+
+![npm weekly downloads](https://img.shields.io/npm/dw/jelly-switch.svg?style=flat)
+
+![npm version](https://img.shields.io/npm/v/jelly-switch.svg?style=flat)
+
+![MIT License](https://img.shields.io/npm/l/jelly-switch.svg?style=flat)
+
+
 # jelly-switch
 A simple, customizable and jellified switch built as web component using ES6 javascript 
 ![jelly-switch-demo](https://raw.githubusercontent.com/akhil0001/jellySwitch/master/demo-1.gif)
