@@ -5,6 +5,9 @@
 
 # jelly-switch
 A simple, customizable and jellified switch built as web component using ES6 javascript 
+
+### NOTE: This component is still in work in progress *WIP*. So there is a high chance that the API can change. So please be notified
+
 ![jelly-switch-demo](https://raw.githubusercontent.com/akhil0001/jellySwitch/master/demo-1.gif)
 
 This micro web component(~1.7kB) can be used for any framework
@@ -53,15 +56,15 @@ label,#js1
 
 ## Attributes
 
-- `toggled`
+- `checked`
 
  Add this attribute to set the switch to toggled / checked mode i.e., equivalent to 'checked' attribute of input type 
  ```html
-  <jelly-switch id="js1" toggled></jellyswitch>
+  <jelly-switch id="js1" checked></jellyswitch>
   ```
   (or)
  ```javascript
-js1.toggled = true
+js1.checked = true
 ``` 
 - `disabled`
 
@@ -78,12 +81,12 @@ js1.disabled = true;
 
 The switch component can be styled as a normal and regular HTML element in CSS. There are list of CSS properties below with the default values
 
-| CSS variables | default value | description |
+| CSS variables | Default value | Description |
 |---------------|---------------|-------------|
 |`--off-color ` | #FF4651       | background color of switch when the switch is off or its value is set to false. Can assign any color to rgba, hex values |
 |`--on-color ` | #11C75D       | background color of switch when the switch is on or its value is set to true. Can assign any color to rgba, hex values |
-|`--onHandle-color ` | #FFFFFF      | background color of switch Handle when the switch is on or its value is set to true. Can assign any color to rgba, hex values |
-|`--offHandle-color ` | #FFFFFF     | background color of switch Handle when the switch is off or its value is set to false. Can assign any color to rgba, hex values |
+|`--onHandle-color ` | #FFFFFF      |  color of switch Handle when the switch is on or its value is set to true. Can assign any color to rgba, hex values |
+|`--offHandle-color ` | #FFFFFF     |  color of switch Handle when the switch is off or its value is set to false. Can assign any color to rgba, hex values |
 
 The CSS variables can be set dynamically. For example, refer the following snippet
 ```javascript
@@ -130,7 +133,9 @@ function handleToggle(e)
  - [x] Lazy property handling
  - [x] Documentation
  - [x] npm publish
+ - [ ] add label 'for' support 
  - [ ] Adding unit test cases
+ - [ ] Write contribute.md file
  - [ ] handling drag event
 
 # License
