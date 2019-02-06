@@ -6,32 +6,43 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Jelly Switch Component</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
 </head>
 
 <body>
-  <p>Thevalue of switch is changed to <p id="valueOfSwitch"></p>
-  </p>
-  <label for="js1">Let's rock
-  <jelly-switch id="js1" checked onToggle="return captureTheChangeEvent(event)"></jelly-switch></label>
+  <!-- <p>The value of switch is changed to <p id="valueOfSwitch"></p>
+  </p> -->
+  <jelly-switch id="js1"  onToggle="return captureTheChangeEvent(this,event)" name="switch">
+    <p slot="content-right" id="leftContent">On/Off</p>
+  </jelly-switch>
+  
   <style>
-    /* This code is to vertically align the label and switch */
-#js1
-{
-    vertical-align:middle;
-}
-label,#js1
-{
-  display: inline-block;
-}
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+  #js1{
+    font-family: 'Open Sans', sans-serif;
+    display: inline-block;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+  }
+  #js1
+  {
+    vertical-align: middle;
+    color:red;
+  }
 
   </style>
-  <script src="../lib/index.js"></script>
+  <script src="index.js"></script>
   <script>
-     
-    function captureTheChangeEvent(event) {
-      document.getElementById('valueOfSwitch').innerText = ''+event.detail.value;
+    function captureTheChangeEvent(self,event) {
+      if(self.checked)
+      {
+        document.getElementById('leftContent').style.color = 'green';
+      }
+      else
+      {
+        document.getElementById('leftContent').style.color = 'red';
+      }
     }
   </script>
 </body>

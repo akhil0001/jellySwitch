@@ -8,7 +8,7 @@ A simple, customizable and jellified switch built as web component using ES6 jav
 
 ### NOTE: This component is still in work in progress *WIP*. So there is a high chance that the API can change. So please be notified
 
-![jelly-switch-demo](https://raw.githubusercontent.com/akhil0001/jellySwitch/master/demo-1.gif)
+![jelly-switch-image](https://raw.githubusercontent.com/akhil0001/jellySwitch/master/demo-2.gif)
 
 This micro web component(~1.7kB) can be used for any framework
 
@@ -25,7 +25,7 @@ npm i jelly-switch
 ### 2.via script tag
 
 ```html
-<script src ="https://unpkg.com/jelly-switch@0.1.4/lib/index.js"></script>
+<script src ="https://unpkg.com/jelly-switch@0.2.0/lib/index.min.js"></script>
 ```
 
 # Usage
@@ -33,25 +33,20 @@ npm i jelly-switch
 ### 1.Import into module script(required only for npm install):
 
 ```javascript
-import { jellySwitch } from "jelly-switch"
+import { JellySwitch } from "jelly-switch"
 ```
 ### 2.Use it in your web page like any other HTML element
 ```html
-<label for="js1">Did you like it?</label>   
 <jelly-switch id="js1"></jelly-switch>
 ```
-```css
-/* This code is to vertically align the label and switch */
-#js1
-{
-    vertical-align:middle;
-}
-label,#js1
-{
-  display: inline-block;
-}
 
+### 3. Like any other input type, label can be used to bind with the jelly-switch element using 'for' attribute as shown below. For more information on this,  refer the [Slots](#Slots) sub section in [API](#API) section
+```html
+<jelly-switch id="js1">
+    <p slot="content-left">On/Off</p>
+</jelly-switch>
 ```
+
 # API
 
 ## Attributes
@@ -71,12 +66,31 @@ js1.checked = true
 Add this attribute to disable the switch and the opacity will be decreased to half and user can not interact with the switch and cursor will be changed to 'not-allowed'
 ```html
 <jelly-switch id ="js1" disabled></jellyswitch>
-(or)
-```
 
+```
+(or)
 ```javascript
 js1.disabled = true;
 ```
+## Slots
+- For achieving the `label` binding with the `input` by `for` attribute, `slot` feature has been used in this custom element
+- For label to position to left of the `jelly-switch` , slot attribute with the value `content-left` can be used for any other native HTML Element as shown in the example below
+```html
+<jelly-switch>
+    <p slot="content-left">On/Off</p>
+</jelly-switch>
+```
+- For label to position to right of the `jelly-switch` , slot attribute with the value `content-right` can be used for any other native HTML Element as shown below
+```html
+<jelly-switch>
+    <p slot="content-right">On/Off</p>
+</jelly-switch>
+```
+| Slot name | Description | Image |
+|-----------|-------------|-------|
+|`content-left`| This would render the label to left of the switch |![jelly-switch-image-left](leftContent.png)|
+|`content-right`| This would render the label to right of the switch |![jelly-switch-image-right](contentRight.png)
+
 ## Styling
 
 The switch component can be styled as a normal and regular HTML element in CSS. There are list of CSS properties below with the default values
@@ -133,7 +147,9 @@ function handleToggle(e)
  - [x] Lazy property handling
  - [x] Documentation
  - [x] npm publish
- - [ ] add label 'for' support 
+ - [x] Add label 'for' support 
+ - [x] Minify js file
+ - [ ] Writing the release notes (changeLog.md file)
  - [ ] Adding unit test cases
  - [ ] Write contribute.md file
  - [ ] handling drag event
