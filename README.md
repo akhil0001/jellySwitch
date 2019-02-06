@@ -40,7 +40,7 @@ import { JellySwitch } from "jelly-switch"
 <jelly-switch id="js1"></jelly-switch>
 ```
 
-### 3. Like any other input type, label can be used to bind with the jelly-switch element using 'for' attribute as shown below. For more information on this,  refer the [Slots](#Slots) sub section in [API](#API) section
+### 3. Like any other input type, label can be used to bind with the jelly-switch element using 'slot' attribute as shown below. For more information on this,  refer the [Slots](#Slots) sub section in [API](#API) section
 ```html
 <jelly-switch id="js1">
     <p slot="content-left">On/Off</p>
