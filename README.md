@@ -8,7 +8,7 @@ A simple, customizable and jellified switch built as web component using ES6 jav
 
 ### NOTE: 
 - This component is still in work in progress *WIP*. So there is a high chance that the API can change. So please be notified
-- Safari browser is not yet supported ([issue](https://github.com/akhil0001/jellySwitch/issues/1))
+
 
 ![jelly-switch-image](https://raw.githubusercontent.com/akhil0001/jellySwitch/master/demo-2.gif)
 
