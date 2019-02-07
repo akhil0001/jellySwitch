@@ -151,7 +151,7 @@ function handleToggle(e)
  - [x] npm publish
  - [x] Add label 'for' support 
  - [x] Minify js file
- - [ ] Support safari browser
+ - [x] Support safari browser
  - [ ] Writing the release notes (changeLog.md file)
  - [ ] Adding unit test cases
  - [ ] Write contribute.md file
