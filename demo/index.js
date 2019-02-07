@@ -1,1 +1,377 @@
-const KEYCODE={SPACE:32,TAB:9},template=document.createElement("template");function templateHTML(){return' \n        <div class="switch">\n        <label for="jelly-switch" id="content-left"><slot name="content-left"></slot></label>\n        <input type="checkbox" name="jelly-switch" id="jelly-switch"></input>\n        <label for="jelly-switch" id="switch"></label>\n        <label for="jelly-switch" id="content-right"><slot name="content-right"></slot></label>\n        </div>\n        <style>\n        :host(:focus)\n        {\n            outline:none;\n            --highlight-scale:12px;\n        }\n        :host([disabled]) label\n        {\n            cursor:not-allowed;\n            opacity:0.5;\n            --highlight-scale:2px;\n        }\n        input#jelly-switch[type=checkbox]{\n            height: 0;\n            width: 0;\n            visibility: hidden;\n        }\n        .switch \n        {\n            display:inline-block;\n        }\n        label\n        {\n            cursor: pointer;\n        }\n        label#switch{\n            text-indent: -9999px;\n            width: 50px;\n            height: 25px;\n            display: inline-block;\n            border-radius: 100px;\n            position: relative;\n            outline:none;\n            -ms-user-select: none; \n            -webkit-touch-callout: none;\n             -webkit-user-select: none;\n             -khtml-user-select: none;\n             -moz-user-select: none;\n             -ms-user-select: none;\n             user-select: none;\n             -webkit-tap-highlight-color: transparent;\n            background: var(--off-color,#FF4651);\n            box-shadow: 0 1px var(--highlight-scale,4px) -1px var(--off-color,#FF4651);\n            transition: .2s ease-in-out;\n        }\n        label#switch:after {\n            box-sizing:border-box;\n            content: \'\';\n            position: absolute;\n            top: 2px;\n            left: 2px;\n            width: 21px;\n            height: 21px;\n            background:var(--offHandle-color,#ffffff);\n            border-radius: 21px;\n            transition: background  .5s ease-in;\n        }\n        label#content-left\n        {\n            position:relative;\n            display: inline-block;\n            top:-7px;\n            height: 0px;\n            transition:0.3s ease-in;\n            padding-left:10px;\n        }\n        label#content-right\n        {\n            position:relative;\n            display: inline-block;\n            top:-7px;   \n            height: 0px;\n            transition:0.3s ease-in;\n            padding-right:10px;\n        }\n        :host([aria-checked]) label#switch:after\n        {\n            animation:expand-left 0.5s linear forwards;\n        }\n        input#jelly-switch:checked+label#switch {\n            background: var(--on-color,#11c75d);\n            box-shadow: 0 2px var(--highlight-scale,4px) -1px var(--on-color,#11c75d);\n        }\n\n        input#jelly-switch:checked+label#switch:after {\n            background:var(--onHandle-color,#ffffff);\n            \n            animation:expand-right .5s linear forwards;\n            transition: background  .5s ease-in;\n        }\n\n        @-webkit-keyframes expand-right\n        {\n            0%\n            {\n                left:2px;\n            }\n            30%,50% \n            {\n                left:2px;\n                width:46px;\n                \n            }\n            60%\n            {\n                left:34px;\n                width:14px;\n            }\n            80%\n            {\n                left:24px;\n                width:24px;   \n            }\n            90%\n            {\n                left:29px;\n                width:19px;  \n            }\n            100%\n            {\n                left:27px;\n                width:21px;\n            }\n        }\n\n        @keyframes expand-right\n        {\n            0%\n            {\n                left:2px;\n            \n            }\n            30%,50%   \n            {\n                left:2px;\n                width:46px;\n                \n            }\n            \n            60%\n            {\n                left:34px;\n                width:14px;\n            }\n            80%\n            {\n                left:24px;\n                width:24px;   \n            }\n            90%\n            {\n                left:29px;\n                width:19px;  \n            }\n            100%\n            {\n                left:27px;\n                width:21px;\n            }\n        }\n\n        @-webkit-keyframes expand-left\n        {\n            0%\n            {\n                left:27px;\n            }\n            30%,50%\n            {\n                left:2px;\n                width:46px;\n            }\n            60%\n            {\n                right:34px;\n                width:14px;\n            }\n            80%\n            {\n                right:24px;\n                width:24px;   \n            }\n            90%\n            {\n                right:29px;\n                width:19px;  \n            }\n            100%\n            {\n                left:2px;\n                width:21px;\n            }\n        }\n\n        @keyframes expand-left\n        {\n            0%\n            {\n                left:27px;\n            }\n            30%,50%\n            {\n                left:2px;\n                width:46px;\n            }\n            60%\n            {\n                right:34px;\n                width:14px;\n            }\n            80%\n            {\n                right:24px;\n                width:24px;   \n            }\n            90%\n            {\n                right:29px;\n                width:19px;  \n            }\n            100%\n            {\n                left:2px;\n                width:21px;\n            }\n        }\n        </style>    '}class JellySwitch extends HTMLElement{static get observedAttributes(){return["checked","disabled"]}constructor(){super();var n=this.attachShadow({mode:"open"});template.innerHTML=templateHTML(),n.appendChild(template.content.cloneNode(!0)),this._jellySwitchDiv=n.getElementById("jelly-switch")}connectedCallback(){if(this._upgradeProperty("checked"),this._upgradeProperty("disabled"),this.hasAttribute("role")||this.setAttribute("role","switch"),this.hasAttribute("tabindex")||this.setAttribute("tabindex",0),this._jellySwitchDiv){this._jellySwitchDiv.addEventListener("click",this._handleClickAndToggle.bind(this)),this.addEventListener("keyup",this._handleKeyPress)}}disconnectedCallback(){this._jellySwitchDiv.removeEventListener("click",this._handleClickAndToggle),this.removeEventListener("keyup",this._handleKeyPress)}get checked(){return this._jellySwitchDiv.checked}set checked(n){"boolean"==typeof n?n?this.setAttribute("checked",""):this.removeAttribute("checked"):console.warn("checked function of jelly-switch.js file allows only boolean value")}get disabled(){return this._jellySwitchDiv.disabled}set disabled(n){"boolean"==typeof n?(this._jellySwitchDiv.disabled=n,n?this.setAttribute("disabled",""):this.removeAttribute("disabled")):console.warn("disabled function of jelly-switch.js file allows only boolean value")}attributeChangedCallback(n,e,t){const i=null!==t;switch(n){case"checked":this.setAttribute("aria-checked",i),this._jellySwitchDiv.checked=i;break;case"disabled":this.setAttribute("aria-disabled",i),this._jellySwitchDiv.disabled=i,i?(this.removeAttribute("tabindex"),this.blur()):this.setAttribute("tabindex",0)}}_handleClickAndToggle(){this.disabled||(this.checked=this._jellySwitchDiv.checked,this.dispatchEvent(new CustomEvent("toggle",{bubbles:!0,detail:{value:this.checked}})))}_handleKeyPress(n){if(!this.disabled&&!n.altKey)switch(n.keyCode){case KEYCODE.SPACE:n.preventDefault(),this._jellySwitchDiv.checked=!this._jellySwitchDiv.checked,this._handleClickAndToggle()}}_upgradeProperty(n){if(this.hasOwnProperty(n)){let e=this[n];delete this[n],this[n]=e}}}window.customElements&&customElements.define("jelly-switch",JellySwitch);
+(function () {
+    const KEYCODE = {
+        SPACE: 32,
+        TAB: 9
+    };
+    const template = document.createElement('template');
+
+    function templateHTML() {
+        return ` 
+        <div class="switch">
+        <label for="jelly-switch" id="content-left"><slot name="content-left"></slot></label>
+        <input type="checkbox" name="jelly-switch" id="jelly-switch"></input>
+        <label for="jelly-switch" id="switch">
+        <p id="jelly-content"></p>
+        </label>
+        
+        <label for="jelly-switch" id="content-right"><slot name="content-right"></slot></label>
+        </div>
+        <style>
+        :host(:focus)
+        {
+            outline:none;
+            --highlight-scale:12px;
+        }
+        :host([disabled]) label
+        {
+            cursor:not-allowed;
+            opacity:0.5;
+            --highlight-scale:2px;
+        }
+        input#jelly-switch[type=checkbox]{
+            height: 0;
+            width: 0;
+            visibility: hidden;
+        }
+        .switch 
+        {
+            display:inline-block;
+        }
+        label
+        {
+            cursor: pointer;
+        }
+        label#switch{
+            text-indent: -9999px;
+            width: 50px;
+            height: 25px;
+            display: inline-block;
+            border-radius: 100px;
+            position: relative;
+            outline:none;
+            -ms-user-select: none; 
+            -webkit-touch-callout: none;
+             -webkit-user-select: none;
+             -khtml-user-select: none;
+             -moz-user-select: none;
+             -ms-user-select: none;
+             user-select: none;
+             -webkit-tap-highlight-color: transparent;
+            background: var(--off-color,#FF4651);
+            box-shadow: 0 1px var(--highlight-scale,4px) -1px var(--off-color,#FF4651);
+            transition: .2s ease-in-out;
+        }
+        p#jelly-content {
+            box-sizing:border-box;
+            content: '';
+            position: absolute;
+            top: -14px;
+            left: 2px;
+            width: 21px;
+            height: 21px;
+            background:var(--offHandle-color,#ffffff);
+            border-radius: 21px;
+            transition: background  .5s ease-in;
+        }
+        label#content-left
+        {
+            position:relative;
+            display: inline-block;
+            top:-7px;
+            height: 0px;
+            transition:0.3s ease-in;
+            padding-left:10px;
+        }
+        label#content-right
+        {
+            position:relative;
+            display: inline-block;
+            top:-7px;   
+            height: 0px;
+            transition:0.3s ease-in;
+            padding-right:10px;
+        }
+        :host([aria-checked = "false"]) p#jelly-content
+        {
+            animation:expand-left 0.5s linear forwards;
+        }
+        :host([aria-checked = "true"][checked]) label#switch {
+            background: var(--on-color,#11c75d);
+            box-shadow: 0 2px var(--highlight-scale,4px) -1px var(--on-color,#11c75d);
+        }
+
+        :host([aria-checked = "true"]) p#jelly-content {
+            background:var(--onHandle-color,#ffffff);
+            
+            animation:expand-right .5s linear forwards;
+            transition: background  .5s ease-in;
+        }
+
+        @-webkit-keyframes expand-right
+        {
+            0%
+            {
+                left:2px;
+            }
+            30%,50% 
+            {
+                left:2px;
+                width:46px;
+                
+            }
+            60%
+            {
+                left:34px;
+                width:14px;
+            }
+            80%
+            {
+                left:24px;
+                width:24px;   
+            }
+            90%
+            {
+                left:29px;
+                width:19px;  
+            }
+            100%
+            {
+                left:27px;
+                width:21px;
+            }
+        }
+
+        @keyframes expand-right
+        {
+            0%
+            {
+                left:2px;
+            
+            }
+            30%,50%   
+            {
+                left:2px;
+                width:46px;
+                
+            }
+            
+            60%
+            {
+                left:34px;
+                width:14px;
+            }
+            80%
+            {
+                left:24px;
+                width:24px;   
+            }
+            90%
+            {
+                left:29px;
+                width:19px;  
+            }
+            100%
+            {
+                left:27px;
+                width:21px;
+            }
+        }
+
+        @-webkit-keyframes expand-left
+        {
+            0%
+            {
+                left:27px;
+            }
+            30%,50%
+            {
+                left:2px;
+                width:46px;
+            }
+            60%
+            {
+                right:34px;
+                width:14px;
+            }
+            80%
+            {
+                right:24px;
+                width:24px;   
+            }
+            90%
+            {
+                right:29px;
+                width:19px;  
+            }
+            100%
+            {
+                left:2px;
+                width:21px;
+            }
+        }
+
+        @keyframes expand-left
+        {
+            0%
+            {
+                left:27px;
+            }
+            30%,50%
+            {
+                left:2px;
+                width:46px;
+            }
+            60%
+            {
+                right:34px;
+                width:14px;
+            }
+            80%
+            {
+                right:24px;
+                width:24px;   
+            }
+            90%
+            {
+                right:29px;
+                width:19px;  
+            }
+            100%
+            {
+                left:2px;
+                width:21px;
+            }
+        }
+        </style>    `;
+    }
+
+    class JellySwitch extends HTMLElement {
+
+        static get observedAttributes() {
+            return ["checked", "disabled"];
+        }
+
+        constructor() {
+            super();
+            var shadowElement = this.attachShadow({
+                mode: 'open'
+            })
+            template.innerHTML = templateHTML();
+            shadowElement.appendChild(template.content.cloneNode(true));
+            this._jellySwitchDiv = shadowElement.getElementById('jelly-switch');
+
+        }
+        connectedCallback() {
+            this._upgradeProperty('checked');
+            this._upgradeProperty('disabled');
+            if (!this.hasAttribute('role')) {
+                this.setAttribute('role', 'switch');
+            }
+            if (!this.hasAttribute('tabindex'))
+                this.setAttribute('tabindex', 0);
+            if (this._jellySwitchDiv) {
+                var self = this;
+
+                this._jellySwitchDiv.addEventListener("click", this._handleClickAndToggle.bind(self));
+                this.addEventListener('keyup', this._handleKeyPress);
+            }
+        }
+        disconnectedCallback() {
+            this._jellySwitchDiv.removeEventListener("click", this._handleClickAndToggle);
+            this.removeEventListener('keyup', this._handleKeyPress);
+        }
+        get checked() {
+            return this._jellySwitchDiv.checked;
+        }
+
+        set checked(isChecked) {
+
+            if (typeof isChecked === "boolean") {
+
+                if (isChecked)
+                    this.setAttribute('checked', "");
+                else
+                    this.removeAttribute('checked');
+            } else {
+                console.warn('checked function of jelly-switch.js file allows only boolean value');
+            }
+        }
+
+        get disabled() {
+            return this._jellySwitchDiv.disabled;
+        }
+
+        set disabled(isDisabled) {
+            if (typeof isDisabled === "boolean") {
+                this._jellySwitchDiv.disabled = isDisabled;
+                if (isDisabled)
+                    this.setAttribute('disabled', "");
+                else
+                    this.removeAttribute('disabled');
+            } else {
+                console.warn('disabled function of jelly-switch.js file allows only boolean value');
+            }
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+            const hasValue = newValue !== null;
+            switch (name) {
+                case 'checked':
+                    this.setAttribute('aria-checked', hasValue);
+                    this._jellySwitchDiv.checked = hasValue;
+                    break;
+                case 'disabled':
+                    this.setAttribute('aria-disabled', hasValue);
+                    this._jellySwitchDiv.disabled = hasValue;
+                    if (hasValue) {
+                        this.removeAttribute('tabindex');
+                        this.blur();
+                    } else {
+                        this.setAttribute('tabindex', 0);
+                    }
+                    break;
+            }
+
+        }
+        _handleClickAndToggle() {
+            if (!this.disabled) {
+                this.checked = this._jellySwitchDiv.checked;
+                this.dispatchEvent(new CustomEvent("toggle", {
+                    bubbles: true,
+                    detail: {
+                        value: this.checked
+                    }
+                }));
+            }
+        }
+        _handleKeyPress(event) {
+            if (!this.disabled) {
+                if (event.altKey)
+                    return;
+
+                switch (event.keyCode) {
+                    case KEYCODE.SPACE:
+                        event.preventDefault();
+                        this._jellySwitchDiv.checked = !this._jellySwitchDiv.checked;
+                        this._handleClickAndToggle();
+                        break;
+
+                }
+            } else {
+                return;
+            }
+
+        }
+        _upgradeProperty(prop) {
+            if (this.hasOwnProperty(prop)) {
+                let value = this[prop];
+                delete this[prop];
+                this[prop] = value;
+            }
+        }
+
+    }
+    if (window.customElements) {
+        customElements.define('jelly-switch', JellySwitch);
+    }
+})();

@@ -27,7 +27,7 @@ npm i jelly-switch
 ### 2.via script tag
 
 ```html
-<script src ="https://unpkg.com/jelly-switch@0.2.1/lib/index.min.js"></script>
+<script src ="https://unpkg.com/jelly-switch@0.2.3/lib/index.min.js"></script>
 ```
 
 # Usage

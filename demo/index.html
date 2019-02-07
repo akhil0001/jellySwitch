@@ -11,7 +11,7 @@
 <body>
   <!-- <p>The value of switch is changed to <p id="valueOfSwitch"></p>
   </p> -->
-  <jelly-switch id="js1" checked onToggle="return captureTheChangeEvent(this,event)" name="switch">
+  <jelly-switch id="js1"  onToggle="return captureTheChangeEvent(this,event)" name="switch">
     <p slot="content-right" id="rightContent">On/Off</p>
   </jelly-switch>
   
@@ -29,11 +29,10 @@
   {
     vertical-align: middle;
     color:red;
-    --onHandle-color:#111;
   }
 
   </style>
-  <script src="../lib/index.min.js"></script>
+  <script src="index.js"></script>
   <script>
     function captureTheChangeEvent(self,event) {
       if(self.checked)
