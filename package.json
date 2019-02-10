@@ -1,6 +1,6 @@
 {
   "name": "jelly-switch",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A customizable simple and jellified switch web component",
   "main": "lib/index.js",
   "scripts": {
