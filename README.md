@@ -6,11 +6,12 @@
 # jelly-switch
 A simple, customizable and jellified switch built as web component using ES6 javascript 
 
-### NOTE: 
-- This component is still in work in progress *WIP*. So there is a high chance that the API can change. So please be notified
-
-
 ![jelly-switch-image](https://raw.githubusercontent.com/akhil0001/jellySwitch/master/demo-2.gif)
+
+> NOTE: 
+      - This component is still in work in progress *WIP*. So there is a high chance that the API can change. So please be notified
+
+
 
 This micro web component(~1.7kB) can be used for any framework
 
@@ -57,7 +58,7 @@ import { JellySwitch } from "jelly-switch"
 
  Add this attribute to set the switch to toggled / checked mode i.e., equivalent to 'checked' attribute of input type 
  ```html
-  <jelly-switch id="js1" checked></jellyswitch>
+  <jelly-switch id="js1" checked></jelly-switch>
   ```
   (or)
  ```javascript
@@ -67,7 +68,7 @@ js1.checked = true
 
 Add this attribute to disable the switch and the opacity will be decreased to half and user can not interact with the switch and cursor will be changed to 'not-allowed'
 ```html
-<jelly-switch id ="js1" disabled></jellyswitch>
+<jelly-switch id ="js1" disabled></jelly-switch>
 
 ```
 (or)
