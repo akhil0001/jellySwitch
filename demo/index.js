@@ -1,12 +1,10 @@
-(function () {
-    const KEYCODE = {
-        SPACE: 32,
-        TAB: 9
-    };
-    const template = document.createElement('template');
+const KEYCODE = {
+    SPACE: 32,
+    TAB: 9
+};
+const template = document.createElement('template');
 
-    function templateHTML() {
-        return ` 
+const templateHTML  = ` 
         <div class="switch">
         <label for="jelly-switch" id="content-left"><slot name="content-left"></slot></label>
         <input type="checkbox" name="jelly-switch" id="jelly-switch"></input>
@@ -243,49 +241,47 @@
             }
         }
         </style>    `;
+
+
+class JellySwitch extends HTMLElement {
+
+    static get observedAttributes() {
+        return ["checked", "disabled"];
     }
 
-    class JellySwitch extends HTMLElement {
+    constructor() {
+        super();
+        var shadowElement = this.attachShadow({
+            mode: 'open'
+        })
+        template.innerHTML = templateHTML;
+        shadowElement.appendChild(template.content.cloneNode(true));
+        this._jellySwitchDiv = shadowElement.getElementById('jelly-switch');
 
-        static get observedAttributes() {
-            return ["checked", "disabled"];
+    }
+    connectedCallback() {
+        this._upgradeProperty('checked');
+        this._upgradeProperty('disabled');
+        if (!this.hasAttribute('role')) {
+            this.setAttribute('role', 'switch');
         }
-
-        constructor() {
-            super();
-            var shadowElement = this.attachShadow({
-                mode: 'open'
-            })
-            template.innerHTML = templateHTML();
-            shadowElement.appendChild(template.content.cloneNode(true));
-            this._jellySwitchDiv = shadowElement.getElementById('jelly-switch');
-
+        if (!this.hasAttribute('tabindex'))
+            this.setAttribute('tabindex', 0);
+        if (this._jellySwitchDiv) {
+            this._jellySwitchDiv.addEventListener("click", this._handleClickAndToggle.bind(this));
+            this.addEventListener('keyup', this._handleKeyPress);
         }
-        connectedCallback() {
-            this._upgradeProperty('checked');
-            this._upgradeProperty('disabled');
-            if (!this.hasAttribute('role')) {
-                this.setAttribute('role', 'switch');
-            }
-            if (!this.hasAttribute('tabindex'))
-                this.setAttribute('tabindex', 0);
-            if (this._jellySwitchDiv) {
-                var self = this;
+    }
+    disconnectedCallback() {
+        this._jellySwitchDiv.removeEventListener("click", this._handleClickAndToggle);
+        this.removeEventListener('keyup', this._handleKeyPress);
+    }
+    get checked() {
+        return this._jellySwitchDiv.checked;
+    }
 
-                this._jellySwitchDiv.addEventListener("click", this._handleClickAndToggle.bind(self));
-                this.addEventListener('keyup', this._handleKeyPress);
-            }
-        }
-        disconnectedCallback() {
-            this._jellySwitchDiv.removeEventListener("click", this._handleClickAndToggle);
-            this.removeEventListener('keyup', this._handleKeyPress);
-        }
-        get checked() {
-            return this._jellySwitchDiv.checked;
-        }
-
-        set checked(isChecked) {
-
+    set checked(isChecked) {
+        
             if (typeof isChecked === "boolean") {
 
                 if (isChecked)
@@ -295,83 +291,82 @@
             } else {
                 console.warn('checked function of jelly-switch.js file allows only boolean value');
             }
+    }
+
+    get disabled() {
+        return this._jellySwitchDiv.disabled;
+    }
+
+    set disabled(isDisabled) {
+        if (typeof isDisabled === "boolean") {
+            this._jellySwitchDiv.disabled = isDisabled;
+            if (isDisabled)
+                this.setAttribute('disabled', "");
+            else
+                this.removeAttribute('disabled');
+        } else {
+            console.warn('disabled function of jelly-switch.js file allows only boolean value');
         }
+    }
 
-        get disabled() {
-            return this._jellySwitchDiv.disabled;
-        }
-
-        set disabled(isDisabled) {
-            if (typeof isDisabled === "boolean") {
-                this._jellySwitchDiv.disabled = isDisabled;
-                if (isDisabled)
-                    this.setAttribute('disabled', "");
-                else
-                    this.removeAttribute('disabled');
-            } else {
-                console.warn('disabled function of jelly-switch.js file allows only boolean value');
-            }
-        }
-
-        attributeChangedCallback(name, oldValue, newValue) {
-            const hasValue = newValue !== null;
-            switch (name) {
-                case 'checked':
-                    this.setAttribute('aria-checked', hasValue);
-                    this._jellySwitchDiv.checked = hasValue;
-                    break;
-                case 'disabled':
-                    this.setAttribute('aria-disabled', hasValue);
-                    this._jellySwitchDiv.disabled = hasValue;
-                    if (hasValue) {
-                        this.removeAttribute('tabindex');
-                        this.blur();
-                    } else {
-                        this.setAttribute('tabindex', 0);
-                    }
-                    break;
-            }
-
-        }
-        _handleClickAndToggle() {
-            if (!this.disabled) {
-                this.checked = this._jellySwitchDiv.checked;
-                this.dispatchEvent(new CustomEvent("toggle", {
-                    bubbles: true,
-                    detail: {
-                        value: this.checked
-                    }
-                }));
-            }
-        }
-        _handleKeyPress(event) {
-            if (!this.disabled) {
-                if (event.altKey)
-                    return;
-
-                switch (event.keyCode) {
-                    case KEYCODE.SPACE:
-                        event.preventDefault();
-                        this._jellySwitchDiv.checked = !this._jellySwitchDiv.checked;
-                        this._handleClickAndToggle();
-                        break;
-
+    attributeChangedCallback(name, oldValue, newValue) {
+        const hasValue = newValue !== null;
+        switch (name) {
+            case 'checked':
+                this.setAttribute('aria-checked', hasValue);
+                this._jellySwitchDiv.checked = hasValue;
+                break;
+            case 'disabled':
+                this.setAttribute('aria-disabled', hasValue);
+                this._jellySwitchDiv.disabled = hasValue;
+                if (hasValue) {
+                    this.removeAttribute('tabindex');
+                    this.blur();
+                } else {
+                    this.setAttribute('tabindex', 0);
                 }
-            } else {
+                break;
+        }
+
+    }
+    _handleClickAndToggle() {
+        if (!this.disabled) {
+            this.checked = this._jellySwitchDiv.checked;
+            this.dispatchEvent(new CustomEvent("toggle", {
+                bubbles: true,
+                detail: {
+                    value: this.checked
+                }
+            }));
+        }
+    }
+    _handleKeyPress(event) {
+        if (!this.disabled) {
+            if (event.altKey)
                 return;
-            }
 
-        }
-        _upgradeProperty(prop) {
-            if (this.hasOwnProperty(prop)) {
-                let value = this[prop];
-                delete this[prop];
-                this[prop] = value;
+            switch (event.keyCode) {
+                case KEYCODE.SPACE:
+                    event.preventDefault();
+                    this._jellySwitchDiv.checked = !this._jellySwitchDiv.checked;
+                    this._handleClickAndToggle();
+                    break;
+
             }
+        } else {
+            return;
         }
 
     }
-    if (window.customElements) {
-        customElements.define('jelly-switch', JellySwitch);
+    _upgradeProperty(prop) {
+        if (this.hasOwnProperty(prop)) {
+            let value = this[prop];
+            delete this[prop];
+            this[prop] = value;
+        }
     }
-})();
+
+}
+if (window.customElements) {
+    customElements.define('jelly-switch', JellySwitch);
+}
