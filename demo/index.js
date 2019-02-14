@@ -1,18 +1,15 @@
-(function(){
-
 const KEYCODE = {
     SPACE: 32,
     TAB: 9
 };
 const template = document.createElement('template');
 
-function templateHTML() {
-    return ` 
+const templateHTML  = ` 
         <div class="switch">
         <label for="jelly-switch" id="content-left"><slot name="content-left"></slot></label>
         <input type="checkbox" name="jelly-switch" id="jelly-switch"></input>
         <label for="jelly-switch" id="switch">
-        <p id="jelly-ball"></p>
+        <p id="jelly-content"></p>
         </label>
         
         <label for="jelly-switch" id="content-right"><slot name="content-right"></slot></label>
@@ -62,7 +59,7 @@ function templateHTML() {
             box-shadow: 0 1px var(--highlight-scale,4px) -1px var(--off-color,#FF4651);
             transition: .2s ease-in-out;
         }
-        p#jelly-ball {
+        p#jelly-content {
             box-sizing:border-box;
             content: '';
             position: absolute;
@@ -92,16 +89,16 @@ function templateHTML() {
             transition:0.3s ease-in;
             padding-right:10px;
         }
-        :host([aria-checked = "false"]) p#jelly-ball
+        :host([aria-checked = "false"]) p#jelly-content
         {
             animation:expand-left 0.5s linear forwards;
         }
-        :host([aria-checked = "true"]) label#switch {
+        :host([aria-checked = "true"][checked]) label#switch {
             background: var(--on-color,#11c75d);
             box-shadow: 0 2px var(--highlight-scale,4px) -1px var(--on-color,#11c75d);
         }
 
-        :host([aria-checked = "true"]) p#jelly-ball {
+        :host([aria-checked = "true"]) p#jelly-content {
             background:var(--onHandle-color,#ffffff);
             
             animation:expand-right .5s linear forwards;
@@ -244,7 +241,6 @@ function templateHTML() {
             }
         }
         </style>    `;
-}
 
 class JellySwitch extends HTMLElement {
 
@@ -257,7 +253,7 @@ class JellySwitch extends HTMLElement {
         var shadowElement = this.attachShadow({
             mode: 'open'
         })
-        template.innerHTML = templateHTML();
+        template.innerHTML = templateHTML;
         shadowElement.appendChild(template.content.cloneNode(true));
         this._jellySwitchDiv = shadowElement.getElementById('jelly-switch');
 
@@ -271,9 +267,7 @@ class JellySwitch extends HTMLElement {
         if (!this.hasAttribute('tabindex'))
             this.setAttribute('tabindex', 0);
         if (this._jellySwitchDiv) {
-            var self = this;
-  
-            this._jellySwitchDiv.addEventListener("click", this._handleClickAndToggle.bind(self));
+            this._jellySwitchDiv.addEventListener("click", this._handleClickAndToggle.bind(this));
             this.addEventListener('keyup', this._handleKeyPress);
         }
     }
@@ -375,4 +369,3 @@ class JellySwitch extends HTMLElement {
 if (window.customElements) {
     customElements.define('jelly-switch', JellySwitch);
 }
-})();

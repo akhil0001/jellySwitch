@@ -12,7 +12,7 @@
   <!-- <p>The value of switch is changed to <p id="valueOfSwitch"></p>
   </p> -->
   <jelly-switch id="js1"  onToggle="return captureTheChangeEvent(this,event)" name="switch">
-    <p slot="content-right" id="leftContent">On/Off</p>
+    <p slot="content-right" id="rightContent">On/Off</p>
   </jelly-switch>
   
   <style>
@@ -39,11 +39,11 @@
     function captureTheChangeEvent(self,event) {
       if(self.checked)
       {
-        document.getElementById('leftContent').style.color = 'green';
+        document.getElementById('rightContent').style.color = 'green';
       }
       else
       {
-        document.getElementById('leftContent').style.color = 'red';
+        document.getElementById('rightContent').style.color = 'red';
       }
     }
   </script>
