@@ -238,7 +238,6 @@ const templateHTML  = `
         }
         </style>    `;
 
-
 class JellySwitch extends HTMLElement {
 
     static get observedAttributes() {
