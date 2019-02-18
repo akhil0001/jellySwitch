@@ -9,39 +9,34 @@
 </head>
 
 <body>
-  <!-- <p>The value of switch is changed to <p id="valueOfSwitch"></p>
-  </p> -->
-  <jelly-switch id="js1"  onToggle="return captureTheChangeEvent(this,event)" name="switch">
-    <p slot="content-right" id="rightContent">On/Off</p>
-  </jelly-switch>
-  
+  <div id="container">
+    <jelly-switch id="js1" onToggle="return captureTheChangeEvent(this,event)" right-value="Ek Hee Raasta">
+    </jelly-switch>
+  </div>
   <style>
     @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-  #js1{
-    font-family: 'Open Sans', sans-serif;
-    display: inline-block;
-    position: absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-  }
-  #js1
-  {
-    vertical-align: middle;
-    color:red;
-  }
 
+    .container {
+      font-family: 'Open Sans', sans-serif;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #js1 {
+      font-family: 'Open Sans', sans-serif;
+      vertical-align: middle;
+      color: red;
+    }
   </style>
   <script src="index.js"></script>
   <script>
-    function captureTheChangeEvent(self,event) {
-      if(self.checked)
-      {
-        document.getElementById('rightContent').style.color = 'green';
-      }
-      else
-      {
-        document.getElementById('rightContent').style.color = 'red';
+    function captureTheChangeEvent(self, event) {
+      if (self.checked) {
+        document.getElementById('js1').style.color = 'green';
+      } else {
+        document.getElementById('js1').style.color = 'red';
       }
     }
   </script>
